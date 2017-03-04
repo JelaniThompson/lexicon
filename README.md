@@ -1,6 +1,6 @@
 # Lexicon
 
-**TODO: Add description**
+**CLI built in Elixir that returns word definitions**
 
 ## Installation
 
