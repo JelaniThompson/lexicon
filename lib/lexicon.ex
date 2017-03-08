@@ -1,21 +1,25 @@
 defmodule Lexicon do
     def main(args) do
-        args |> parse_args |> process |> cleanup
+        args |> parse_args |> get_definition
+        # add process and cleanup later
     end
 
-    # Parse arguments into a keyword list
-    def parse_args(args) do
-        baseURL = "http://api.pearson.com/v2/dictionaries/entries"
-        options = %{ :define => "define" }
-        
-        cmd_opts = OptionParser.parse(
+    # Parse command line arguments into a keyword list
+    def parse_args(args) do        
+        {opts, _, _} = OptionParser.parse(
             args,
             switches: [define: :string],
             aliases: [d: :define]
         )
-        
-        case cmd_opts do
-           {[:define], _} -> # Search here 
-        end
+        definition = opts[:define]
+        # IO.inspect(definition)
     end
+
+    def get_definition(definition) do
+        baseURL = "http://api.pearson.com/v2/dictionaries/entries/" <> definition
+        IO.puts(baseURL)
+    end
+
 end
+
+# Omnisphere/Nexus - Mac - divyanshprabhakar@gmail.com (Richie)
