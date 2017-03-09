@@ -22,3 +22,11 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
+## Usage
+To use Lexicon, install and run with the following:
+  ```
+  ./Lexicon --define {word to define}
+  *OR*
+  ./Lexicon -d {word to define}
+  ```
+You can currently only grab word definitions but I plan to add flags for getting the parts of speech a word is used in and sentence examples in the near future.   
