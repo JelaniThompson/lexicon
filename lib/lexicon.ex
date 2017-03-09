@@ -1,6 +1,9 @@
 defmodule Lexicon do
     def main(args) do
-        args |> parse_args |> get_definition
+        args 
+        |> parse_args 
+        |> get_definition 
+        |> return_definition
         # add process and cleanup later
     end
 
@@ -16,10 +19,12 @@ defmodule Lexicon do
     end
 
     def get_definition(definition) do
-        baseURL = "http://api.pearson.com/v2/dictionaries/entries/" <> definition
-        IO.puts(baseURL)
+        baseURL = "http://api.pearson.com/v2/dictionaries/entries?headword=" <> definition
     end
 
+    def return_definition(baseURL) do
+        word = HTTPotion.get(baseURL)
+        # IO.puts(response.results.senses.definition)
+        IO.puts(word.body)
+    end
 end
-
-# Omnisphere/Nexus - Mac - divyanshprabhakar@gmail.com (Richie)
