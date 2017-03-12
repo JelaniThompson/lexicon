@@ -21,16 +21,13 @@ defmodule Lexicon do
         "http://api.pearson.com/v2/dictionaries/entries?headword=" <> definition
     end
 
+    # Return the word definition
     def return_definition(baseURL) do
         HTTPotion.get(baseURL)
-        |> Map.get(:body)
-        |> Poison.decode
-        |> case do {_, response} -> response end
-        |> case do {_, results} -> results end
-        |> Map.fetch("results")
-        |> List.first |> Map.fetch("senses") |> case do {:ok, senses} -> senses end 
-        |> List.first |> Map.fetch("translations") |> case do {_, translations} -> translations end 
-        |> List.first |> Map.fetch("example") |> case do {_, example} -> example end |> List.first 
-        |> Map.fetch("text") |> IO.inspect
+        |> Map.get(:body) |> Poison.decode |> case do {_, response} -> response end
+        |> Map.fetch("results") |> case do {_, results} -> results end |> List.first
+        |> Map.fetch("senses") |> case do {:ok, senses} -> senses end |> List.first
+        |> Map.fetch("definition") |> case do {_, definition} -> definition end 
+        |> IO.inspect(label: "Definition:")
     end
 end
