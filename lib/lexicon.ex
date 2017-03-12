@@ -14,17 +14,23 @@ defmodule Lexicon do
             switches: [define: :string],
             aliases: [d: :define]
         )
-        definition = opts[:define]
-        # IO.inspect(definition)
+        opts[:define]
     end
 
     def get_definition(definition) do
-        baseURL = "http://api.pearson.com/v2/dictionaries/entries?headword=" <> definition
+        "http://api.pearson.com/v2/dictionaries/entries?headword=" <> definition
     end
 
     def return_definition(baseURL) do
-        word = HTTPotion.get(baseURL)
-        # IO.puts(response.results.senses.definition)
-        IO.puts(word.body)
+        HTTPotion.get(baseURL)
+        |> Map.get(:body)
+        |> Poison.decode
+        |> case do {_, response} -> response end
+        |> case do {_, results} -> results end
+        |> Map.fetch("results")
+        |> List.first |> Map.fetch("senses") |> case do {:ok, senses} -> senses end 
+        |> List.first |> Map.fetch("translations") |> case do {_, translations} -> translations end 
+        |> List.first |> Map.fetch("example") |> case do {_, example} -> example end |> List.first 
+        |> Map.fetch("text") |> IO.inspect
     end
 end
