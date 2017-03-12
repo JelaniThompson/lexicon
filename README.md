@@ -2,6 +2,12 @@
 
 **CLI built in Elixir that returns word definitions**
 
+# Tasks that still need to be finished:
+- [ ] Get defintions for words with more than one definition e.g. (Banana, Go Bananas)
+- [ ] Include examples of word usage
+- [ ] Include part of speech the word is used in (adjective, noun, verb, etc.)
+- [ ] Google Translate for languages later on??? 🤔
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
